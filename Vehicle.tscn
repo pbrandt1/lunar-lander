@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/art/raptor-rcs-1.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/coast-1.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/raptor-1.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/landed-1.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/rcs-1.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/crashed-1.png" type="Texture" id=6]
+[ext_resource path="res://Vehicle.gd" type="Script" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "raptor",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "coast",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "crashed",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "raptor_rcs",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "landed",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "rcs",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 11.8755, 63.762 )
+
+[node name="Vehicle" type="Area2D"]
+script = ExtResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "coast"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.115295, -32.0224 )
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="." to="." method="_on_Vehicle_body_entered"]
