@@ -5,7 +5,7 @@ signal contact
 export var gravity_acc = 1.625 * 5
 export var vx_max = 2
 export var vy_max = 10
-export var tilt_max = 10 # deg
+export var tilt_max = 20 # deg
 
 var velocity = Vector2()
 var throttle = 0.0
