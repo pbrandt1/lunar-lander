@@ -12,7 +12,7 @@ func _process(delta):
 	$HUD.update_propellant($Vehicle.propellant)
 	$HUD.update_throttle($Vehicle.throttle)
 	$HUD.update_velocity($Vehicle.velocity)
-	$HUD.update_tilt($Vehicle.rotation_degrees)
+	$HUD.update_attitude($Vehicle.rotation_degrees)
 
 func _on_Vehicle_contact(_ok, message):
 	$HUD.show_message(message)

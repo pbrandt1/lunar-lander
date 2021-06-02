@@ -11,7 +11,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 105, 38 )
+extents = Vector2( 101.622, 38 )
 
 [node name="Surface" type="RigidBody2D"]
 position = Vector2( 800, 450 )
@@ -20,6 +20,31 @@ gravity_scale = 0.0
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." groups=[
+"deadly_zone",
+]]
+position = Vector2( 0, 1 )
+polygon = PoolVector2Array( -798.5, 259.5, -780.5, 259.5, -746, 271.5, -690.5, 272, -677, 264, -656, 263, -618, 220.5, -556.5, 192.5, -409.5, 191.5, -390, 259.5, -361.5, 284, -339, 290, -240.296, 290.333, -180.245, 283.037, -166.214, 269.006, -166.214, 256.659, -123.56, 215.689, -107.846, 214.567, -97.7437, 250.486, -88.764, 260.588, -82.5905, 273.496, -66.876, 283.037, -38.8145, 285.843, -10.7529, 304.925, 29.0945, 341.966, 53.2275, 315.027, 82.4115, 307.17, 95.881, 290.894, 118.33, 292.578, 138.832, 292.627, 141.502, 299.301, 342.153, 298.594, 373.37, 333.379, 384.383, 336.1, 405.764, 366.836, 499.754, 368.172, 519.354, 361.49, 542.517, 359.708, 632.053, 366.39, 799.127, 366.5, 800.018, 448.908, -799.322, 447.43 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=[
+"safe_zone",
+]]
+process_priority = 1
 position = Vector2( 242.636, 335.749 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." groups=[
+"safe_zone",
+]]
+process_priority = 1
+position = Vector2( -260.136, 328.386 )
+z_index = 1
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." groups=[
+"safe_zone",
+]]
+process_priority = 1
+position = Vector2( 454.751, 403.558 )
+z_index = 1
 shape = SubResource( 2 )

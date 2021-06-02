@@ -19,8 +19,8 @@ func update_velocity(vel):
 	$GridContainer/VelocityXValue.text = str(round(vel.x))
 	$GridContainer/VelocityYValue.text = str(round(-1 * vel.y))
 
-func update_tilt(tilt):
-	$GridContainer/TiltValue.text = str(round(tilt)) + '°';
+func update_attitude(attitude):
+	$GridContainer/AttitudeValue.text = str(round(attitude)) + '°';
 
 func _on_MessageTimer_timeout():
 	$Message.hide()

@@ -3,7 +3,7 @@ extends Area2D
 signal contact
 
 export var gravity_acc = 1.625 * 5
-export var vx_max = 2
+export var vx_max = 3
 export var vy_max = 10
 export var tilt_max = 20 # deg
 
@@ -28,6 +28,7 @@ func start_game():
 	velocity.x = 100
 	throttle = 0.0
 	propellant = 100.0
+	prop_exists = 1
 	position.x = 100
 	position.y = 100
 	playing = true
@@ -80,6 +81,8 @@ func _process(delta):
 	propellant = clamp(propellant, 0, 100.0)
 	if propellant == 0:
 		prop_exists = 0
+	else:
+		prop_exists = 1
 
 	position += velocity * delta
 	velocity.y += gravity_acc * delta
@@ -97,12 +100,15 @@ func _process(delta):
 	velocity.y += -1 * thrust_acc * cos(rotation) * delta	
 
 
-func _on_Vehicle_body_entered(_body):
+func _on_Vehicle_body_entered(body):
 	# check orientation, horizontal velocity, and vertical velocity
 	var ok = true
 	state_message = 'Successful Landing'
 	
-	if velocity.y > vy_max:
+	if body.is_in_group("deadly_zone"):
+		ok = false
+		state_message = 'Horrible Terrain'
+	elif velocity.y > vy_max:
 		ok = false
 		state_message = 'Too Much Vertical Speed'
 	elif abs(velocity.x) > vx_max:
@@ -114,6 +120,8 @@ func _on_Vehicle_body_entered(_body):
 	
 	if !ok:
 		$AnimatedSprite.animation = "crashed"
+	else:
+		$AnimatedSprite.animation = "landed"
 		
 	emit_signal("contact", ok, state_message)
 		

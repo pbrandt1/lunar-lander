@@ -10,6 +10,11 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "landed",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "raptor",
@@ -28,11 +33,6 @@ animations = [ {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "raptor_rcs",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "landed",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ) ],

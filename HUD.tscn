@@ -112,18 +112,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TiltLabel" type="Label" parent="GridContainer"]
+[node name="AttitudeLabel" type="Label" parent="GridContainer"]
 margin_top = 148.0
 margin_right = 200.0
 margin_bottom = 181.0
 custom_fonts/font = ExtResource( 2 )
-text = "TILT"
+text = "ATTITUDE"
 uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TiltValue" type="Label" parent="GridContainer"]
+[node name="AttitudeValue" type="Label" parent="GridContainer"]
 margin_left = 204.0
 margin_top = 148.0
 margin_right = 404.0
