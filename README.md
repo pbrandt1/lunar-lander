@@ -2,7 +2,7 @@
 
 Game created with the Godot engine.
 
-I can't beat it yet.
+Use the arrows to land the Starship before you run out of propellant.
 
 ![Screenshot of gameplay](./assets/art/Screenshot.png)
 
