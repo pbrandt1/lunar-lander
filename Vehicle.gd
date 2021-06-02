@@ -103,7 +103,7 @@ func _process(delta):
 func _on_Vehicle_body_entered(body):
 	# check orientation, horizontal velocity, and vertical velocity
 	var ok = true
-	state_message = 'Successful Landing'
+	state_message = 'Great Job!\nYou landed with ' + str(round(propellant)) + '% propellant left';
 	
 	if body.is_in_group("deadly_zone"):
 		ok = false

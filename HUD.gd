@@ -5,7 +5,6 @@ signal start_game
 func show_message(text):
 	$Message.text = text
 	$Message.show()
-	$MessageTimer.start()
 
 func update_throttle(throttle):
 	# Throttle is stored as a value between 0 and 1
@@ -28,4 +27,4 @@ func _on_MessageTimer_timeout():
 func _on_StartButton_pressed():
 	emit_signal("start_game")
 	$StartButton.hide()
-	$MessageTimer.start()
+	$Message.hide()
