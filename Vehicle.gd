@@ -11,6 +11,7 @@ var velocity = Vector2()
 var throttle = 0.0
 var propellant = 100.0
 var rotation_rate = PI / 2 # radians per second
+var prop_exists = 1
 
 var playing = false
 var state_message = ''
@@ -41,7 +42,8 @@ func _process(delta):
 	
 	# Throttle up/down
 	if Input.is_action_pressed("ui_up"):
-		throttle = 1
+		throttle = 1 * prop_exists
+		propellant -= 8 * delta
 	else:
 		throttle = 0	
 	
@@ -49,7 +51,7 @@ func _process(delta):
 	# If only left or right pressed, spin the vehicle
 	var left_rcs = Input.is_action_pressed("ui_left")
 	var right_rcs = Input.is_action_pressed("ui_right")
-	var rcs_on = left_rcs || right_rcs
+	var rcs_on = ( left_rcs || right_rcs ) && prop_exists > 0
 
 	# Animations
 	if throttle > 0 && rcs_on:
@@ -65,13 +67,19 @@ func _process(delta):
 	# notes for me. up / down incrememnt and decrement the raptor
 	# left and right pulse the left and right rcs respectively
 	if left_rcs:
-		rotation -= rotation_rate * delta
+		rotation -= rotation_rate * delta * prop_exists
+		propellant -= 1 * delta
 	if right_rcs:
-		rotation += rotation_rate * delta
+		rotation += rotation_rate * delta * prop_exists
+		propellant -= 1 * delta
 	if rotation > 2 * PI:
 		rotation -= 2 * PI;
 	if rotation < -2 * PI:
 		rotation += 2 * PI;
+	
+	propellant = clamp(propellant, 0, 100.0)
+	if propellant == 0:
+		prop_exists = 0
 
 	position += velocity * delta
 	velocity.y += gravity_acc * delta
