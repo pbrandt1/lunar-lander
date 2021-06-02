@@ -112,6 +112,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TiltLabel" type="Label" parent="GridContainer"]
+margin_top = 148.0
+margin_right = 200.0
+margin_bottom = 181.0
+custom_fonts/font = ExtResource( 2 )
+text = "TILT"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TiltValue" type="Label" parent="GridContainer"]
+margin_left = 204.0
+margin_top = 148.0
+margin_right = 404.0
+margin_bottom = 181.0
+custom_fonts/font = ExtResource( 2 )
+text = "0 deg"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Message" type="Label" parent="."]
 anchor_top = 0.5
 anchor_right = 1.0

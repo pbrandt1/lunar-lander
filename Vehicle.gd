@@ -12,7 +12,7 @@ var throttle = 0.0
 var propellant = 100.0
 var rotation_rate = PI / 2 # radians per second
 
-var landed = false
+var playing = false
 var state_message = ''
 var screen_size
 
@@ -29,23 +29,21 @@ func start_game():
 	propellant = 100.0
 	position.x = 100
 	position.y = 100
-	landed = false
+	playing = true
 	$CollisionShape2D.set_deferred("disabled", false)
 	show()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# check for landed condition
-	if landed:
+	if !playing:
 		return
 	
 	# Throttle up/down
 	if Input.is_action_pressed("ui_up"):
-		throttle += 0.03
-	if Input.is_action_pressed("ui_down"):
-		throttle -= 0.03
-	throttle = clamp(throttle, 0, 1)
-	
+		throttle = 1
+	else:
+		throttle = 0	
 	
 	# RCS: If both pressed, landing burn
 	# If only left or right pressed, spin the vehicle
@@ -70,6 +68,10 @@ func _process(delta):
 		rotation -= rotation_rate * delta
 	if right_rcs:
 		rotation += rotation_rate * delta
+	if rotation > 2 * PI:
+		rotation -= 2 * PI;
+	if rotation < -2 * PI:
+		rotation += 2 * PI;
 
 	position += velocity * delta
 	velocity.y += gravity_acc * delta
@@ -98,7 +100,7 @@ func _on_Vehicle_body_entered(_body):
 	elif abs(velocity.x) > vx_max:
 		ok = false
 		state_message = 'Too Much Horizontal Speed'
-	elif fmod(abs(rotation),  2 * PI) > tilt_max / 360:
+	elif abs(rotation_degrees) > 20:
 		ok = false
 		state_message = 'Too Much Tilt'
 	
@@ -108,6 +110,6 @@ func _on_Vehicle_body_entered(_body):
 	emit_signal("contact", ok, state_message)
 		
 	
-	landed = true
+	playing = false
 	rotation = 0
 	$CollisionShape2D.set_deferred("disabled", true)
